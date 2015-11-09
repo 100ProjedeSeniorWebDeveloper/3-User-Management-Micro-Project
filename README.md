@@ -1,7 +1,7 @@
 # 3-User-Management-Micro-Project
 ##Sorun:
 * Müşterimizin Kullanabilmesi için:
-  * bir müşteri(ad , soyad , cep , email , extra) ekleme ekranı içinde
+  * bir müşteri(ad , soyad , cep , email , not) ekleme ekranı içinde
   0 Müşteri Listele
   * Müşteri Ekle
   * Müşteri Ara
