@@ -2,7 +2,7 @@
 ##Sorun:
 * Müşterimizin Kullanabilmesi için:
   * bir müşteri(ad , soyad , cep , email , not) ekleme ekranı içinde
-  0 Müşteri Listele
+  * Müşteri Listele
   * Müşteri Ekle
   * Müşteri Ara
   * Müşteri Güncelle
