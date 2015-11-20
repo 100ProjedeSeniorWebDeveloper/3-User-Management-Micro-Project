@@ -18,7 +18,7 @@ php.net
 Veri tabanı kullanılacaktır
 
 
----
+----
 Saygılarımla 
 
 Kemal Kanok
