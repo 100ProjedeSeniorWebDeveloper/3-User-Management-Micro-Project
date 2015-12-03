@@ -1,0 +1,85 @@
+<?php 
+include ("db.php");
+ ?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>Crud</title>
+	<style>
+table, th, td {
+    border: 1px solid #ccc;
+}
+</style>
+</head>
+<body>
+<form action="">
+	<table cellpadding="10" cellpadding="10">
+		<tr>
+			<td>Musteri Adi</td>
+			<td>Soyadi</td>
+			<td>Cep no</td>
+			<td>E-mail</td>
+			<td>not</td>
+		</tr>
+		<?php 
+			if($musteri = $db->query('SELECT * FROM kullanici_bilgi WHERE 1')){
+			foreach($db->query("SELECT * FROM kullanici_bilgi order by id desc") as $row)
+			{
+		 ?>
+		<tr>
+			<td><?php echo $row["ad"]; ?></td>
+			<td><?php echo $row["soyad"]; ?></td>
+			<td><?php echo $row["cep"]; ?></td>
+			<td><?php echo $row["email"]; ?></td>
+			<td><?php echo $row["not"]; ?></td>
+		</tr>
+		<?php 
+			}
+		}
+		 ?>
+	</table>
+</form>
+<br>
+<br>
+	<form action="#" method="post">
+	<h2>Müsteri Ekle</h2>
+		<table>
+			<tr>
+				<td>Ad:</td>
+				<td><input type="text" name="ad"></td>
+				<td>Soyad:</td>
+				<td><input type="text" name="soyad"></td>
+			</tr>
+			<tr>
+				<td>Tel No:</td>
+				<td><input type="text" name="cep"></td>
+				<td>E-mail:</td>
+				<td><input type="text" name="email"></td>
+			</tr>
+			<tr>
+				<td>Not:</td>
+				<td><input type="text" name="not"></td>
+				<td></td>
+				<td><input type="submit"></td>
+			</tr>
+			
+		</table>
+	</form>
+<?php 
+	if(isset($_POST["ad"]))
+	{
+		$ad=$_POST["ad"];
+		$soyad=$_POST["soyad"];
+		$cep=$_POST["cep"];
+		$email=$_POST["email"];
+		$not=$_POST["not"];
+	
+var_dump($_POST);
+	//kayıt ekleme işlemi
+$query = $db->prepare('insert into kullanici_bilgi (id, ad, soyad, email, cep, not) values(?, ?, ?, ?, ?, ?)');
+$query->execute(array('?', $ad, $soyad, $email, $cep, $not));
+	}
+ ?>
+</body>
+</html>
