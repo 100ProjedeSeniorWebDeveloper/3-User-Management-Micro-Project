@@ -1,7 +1,7 @@
 --
 -- Veritabanı: `crud`
 --
-CREATE DATABASE IF NOT EXISTS `pdo` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS `crud` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `crud`;
 
 -- --------------------------------------------------------
@@ -18,5 +18,5 @@ CREATE TABLE IF NOT EXISTS `kullanici_bilgileri` (
   `cep` varchar(200) COLLATE utf8_turkish_ci NOT NULL,
   `ek` text COLLATE utf8_turkish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci AUTO_INCREMENT=1 ;
 

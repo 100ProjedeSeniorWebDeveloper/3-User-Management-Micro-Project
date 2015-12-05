@@ -5,71 +5,31 @@ include ("db.php");
 <html>
 <head>
 <meta charset="utf-8">
-	<title>Crud</title>
+	<title>User-Management-Micro-Project</title>
 	<style>
 table, th, td {
     border: 1px solid #ccc;
-
 }
 </style>
 </head>
 <body>
-<div >
-	<form action="" method="post">
-	<h2>Müsteri Ekle</h2>
-		<table>
-			<tr>
-				<td>Ad:</td>
-				<td><input type="text" name="ad"></td>
-				<td>Soyad:</td>
-				<td><input type="text" name="soyad"></td>
-				<td>Not :</td>
-				<td><textarea name="ek"></textarea></td>
-			</tr>
-			<tr>
-				<td>Tel No:</td>
-				<td><input type="text" name="cep"></td>
-				<td>E-mail:</td>
-				<td><input type="text" name="email"></td>
-				<td></td>
-				<td><input type="submit" value="Kayıt Ekle"></td>				
-			</tr>
-		</table>
-	</form>
+<div style="float:right; padding:20px;">
+
+	<a href="insert.php"><input type="button" value="Yeni Müşteri Ekle" style="width:200px; height:50px;"></a>
+	<a href="search.php"><input type="button" value="ARAMA YAP" style="width:200px; height:50px;"></a>
+
 </div>
-	<?php 
-		//insert işlemini sayfaya cağırıyoruz.
-	include "insert.php";
 
- 	?>
-
-<br>
-<br>
-
-<div>
-	<form action="" method="post">
-		<table>
-			<tr>
-				<td><label for="search">Arama Yap</label></td>
-				<td><input type="text" name="search" id="search"></td>
-				<td><input type="submit"></td>
-			</tr>
-		</table>
-	</form>
-</div>
-<br>
-<?php include "search.php"; ?>
-<div>
 
 <form action="">
 <h2>Müsteri Listesi</h2>
 	<table cellpadding="10">
 		<tr>
-			<td>Musteri Adi</td>
-			<td>Soyadi</td>
-			<td>Cep no</td>
-			<td>E-mail</td>
-			<td>not</td>
+			<td><b>Musteri Adi</b></td>
+			<td><b>Soyadi</b></td>
+			<td><b>Cep no</b></td>
+			<td><b>E-mail</b></td>
+			<td><b>not</b></td>
 		</tr>
 		<?php 
 		//verileri listeleme işlemi
@@ -79,19 +39,20 @@ table, th, td {
 			{
 		 ?>
 		<tr>
-			<td><div style="width:100px; word-wrap:break-word;"><?php echo $row["ad"]; ?></div></td>
-			<td><div style="width:100px; word-wrap:break-word;"><?php echo $row["soyad"]; ?></div></td>
-			<td><div style="width:150px; word-wrap:break-word;"><?php echo $row["cep"]; ?></div></td>
-			<td><div style="width:150px; max-height:50px;  word-wrap:break-word;"><?php echo $row["email"]; ?></div></td>
-			<td><div style="width:500px; max-height:50px; overflow:auto; word-wrap:break-word;"><?php echo $row["ek"]; ?></div></td>
-			<td><a href='update.php?id=<?php echo $row["id"]; ?>'>Edit</a></td>
-			<td><a href='delete.php?id=<?php echo $row["id"]; ?>'>delete</a></td>
-
+			<td><div style="width:100px; word-wrap:break-word;"><?=$row["ad"]; ?></div></td>
+			<td><div style="width:100px; word-wrap:break-word;"><?=$row["soyad"]; ?></div></td>
+			<td><div style="width:150px; word-wrap:break-word;"><?=$row["cep"]; ?></div></td>
+			<td><div style="width:150px; max-height:50px;  word-wrap:break-word;"><?=$row["email"]; ?></div></td>
+			<td><div style="width:500px; max-height:50px; overflow:auto; word-wrap:break-word;"><?=$row["ek"]; ?></div></td>
+			<td><a href='update.php?id=<?=$row["id"]; ?>'>Edit</a></td>
+			<td><a href='delete.php?id=<?=$row["id"]; ?>'>delete</a></td>
 		</tr>
+
 		<?php 
 			}
 		}
 		 ?>
+
 	</table>
 </form>
 </div>

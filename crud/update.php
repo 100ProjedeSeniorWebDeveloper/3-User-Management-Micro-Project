@@ -12,33 +12,37 @@ $id=$_GET["id"];
 	<table cellpadding="10">
 		
 		<?php 
-			if($musteri = $db->query("SELECT * FROM kullanici_bilgileri WHERE id='$id'")){
-			foreach($db->query("SELECT * FROM kullanici_bilgileri WHERE id=$id") as $row)
+		$musteri=$db->prepare("SELECT * FROM kullanici_bilgileri where id=?");
+		$musteri->execute(array($id));
+
+		if($musteri)
+			
+			foreach($musteri as $row)
 			{
 		 ?>
 		
 			<tr>
 				<td>Ad:</td>
-				<td><input type="text" name="ad" value="<?php echo $row['ad'];?>"></td>
+				<td><input type="text" name="ad" value="<?=$row['ad'];?>"></td>
 				<td>Soyad:</td>
-				<td><input type="text" name="soyad" value="<?php echo $row['soyad'];?>"></td>
+				<td><input type="text" name="soyad" value="<?=$row['soyad'];?>"></td>
 				<td>Not :</td>
-				<td><textarea name="ek" cols="50" rows="8"><?php echo $row['ek'];?></textarea></td>
+				<td><textarea name="ek" cols="50" rows="8"><?=$row['ek'];?></textarea></td>
 			</tr>
 			<tr>
 				<td>Tel No:</td>
-				<td><input type="text" name="cep" value="<?php echo $row['cep'];?>"></td>
+				<td><input type="text" name="cep" value="<?=$row['cep'];?>"></td>
 				<td>E-mail:</td>
-				<td><input type="text" name="email" value="<?php echo $row['email'];?>"></td>
+				<td><input type="text" name="email" value="<?=$row['email'];?>"></td>
 				<td></td>
 				<td><input type="submit" value="Update"></td>				
 			</tr>
 		
 		<?php 
 			}
-		}
+		
 
-if(isset($_POST["ad"]))
+if(isset($_POST["ad"]) && isset($_POST["soyad"]) && isset($_POST["cep"]) && isset($_POST["email"]) && isset($_POST["ek"]))
 {
 	$ad=$_POST["ad"];
 	$soyad=$_POST["soyad"];
@@ -46,8 +50,8 @@ if(isset($_POST["ad"]))
 	$email=$_POST["email"];
 	$ek=$_POST["ek"];
 
-	$update = $db->prepare("UPDATE kullanici_bilgileri SET ad=?, soyad=?, cep=?, email=?, ek=? WHERE id=$id");
-	$update->execute(array($ad, $soyad, $cep, $email, $ek));
+	$update = $db->prepare("UPDATE kullanici_bilgileri SET ad=?, soyad=?, cep=?, email=?, ek=? WHERE id=?");
+	$update->execute(array($ad, $soyad, $cep, $email, $ek,$id));
 	if($update)
 	{	header("location:index.php");
 }
