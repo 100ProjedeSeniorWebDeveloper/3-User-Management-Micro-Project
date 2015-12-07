@@ -2,18 +2,20 @@
 <?php 
 include ("db.php");
 
+if(isset($_GET["id"]))
 $id=$_GET["id"];
 
-
-
+	$musteri=$db->prepare("SELECT * FROM kullanici_bilgileri where id=?");
+	$musteri->execute(array($id));
+$count=$musteri->rowCount();
+if($count>0){
 ?>
 <form action="" method="post">
 <h2>Müsteri Düzenle</h2>
 	<table cellpadding="10">
 		
 		<?php 
-		$musteri=$db->prepare("SELECT * FROM kullanici_bilgileri where id=?");
-		$musteri->execute(array($id));
+		
 
 		if($musteri)
 			
@@ -40,6 +42,10 @@ $id=$_GET["id"];
 		
 		<?php 
 			}
+		}else{
+			echo "Sayfa Bulunamadı. Anasayfaya Yönlendiriliyorsunuz..";
+			header("refresh:2; url=index.php");
+		}
 		
 
 if(isset($_POST["ad"]) && isset($_POST["soyad"]) && isset($_POST["cep"]) && isset($_POST["email"]) && isset($_POST["ek"]))
