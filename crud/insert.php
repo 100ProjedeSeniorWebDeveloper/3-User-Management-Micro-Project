@@ -53,6 +53,8 @@ if(isset($_POST["ad"]) && isset($_POST["soyad"]) && isset($_POST["cep"]) && isse
 $query = $db->prepare('INSERT INTO kullanici_bilgileri (ad, soyad, email, cep, ek) values( ?, ?, ?, ?, ?)');
 $query->execute(array($ad, $soyad, $email, $cep, $ek));
 
+				if($query)
+					header("location:index.php");
 		}
 	}
 
