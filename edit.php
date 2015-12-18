@@ -50,7 +50,7 @@
 			</div>
 			<?php } } ?>
 			<div id="middle">
-				<?php $data=getData();  foreach ($data as $key) {
+				<?php   foreach (getData() as $key) {
 					
 					$id=$key->id;
 					$ad=$key->ad;

@@ -41,8 +41,7 @@
 
 	function sentData(){
 
-			echo "sent edildi";
-
+			
 
 			//$id=$_POST['userid'];
 			$name=$_POST['userName'];
@@ -71,7 +70,7 @@
 
 		try {
 
-			return $data=sql('select * from musteri ');
+			return sql('select * from musteri ');
 			
 		} catch (Exception $e) {
 			
@@ -103,11 +102,10 @@
 	$info=$_POST['userinfo'];
 
 	
-	//var_dump($_POST);
+	
 		try {
-			echo '<script type="text/javascript">alert("Ops Bişiyler Yanlış Gitti Bilader... :) Çalışmıyor...\nLütfen kaynak kodlardaki yorumlara bakınız...");</script>';
 			//update fonksiyonu çalıştıramadım benden kaynaklı da olabilr iki şekilde denedim olmadı... :/
-			//sgl('UPDATE `musteri` SET `id`=?,`ad`=?,`soyad`=?,`cep`=?,`email`=?,`not`=? WHERE id=".$id."',[$id,$name,$surName,$tel,$email,$info]);
+			sql('UPDATE `musteri` SET `ad`=?,`soyad`=?,`cep`=?,`email`=?,`not`=? WHERE id=?',[$userName,$surName,$tel,$email,$info,$id]);
 			//sql("UPDATE `musteri` SET ad=?,  soyad=?, cep=?, email=?, not=? WHERE  id='$id' ",[$name,$surName,$tel,$email,$info]);
 
 			
