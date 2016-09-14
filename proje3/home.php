@@ -8,6 +8,9 @@ require_once "connection.php";
 	<title>Proje3</title>
 </head>
 <body>
+	<? if(!is_null($message)): ?>
+	<p><?=$message?></p>
+	<? endif; ?>
 	<!--İnformation about customer post creat.php-->
 	<form action="creat.php" method="post">
 		<input type="text" name="name" placeholder="Name"><br>

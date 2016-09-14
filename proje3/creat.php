@@ -17,3 +17,8 @@ if($_POST['name'] && $_POST['surname'] && $_POST['email'] && $_POST['phonenum'] 
 		header("Location: home.php");
 	}
 }
+else{
+
+	$_SESSION['error']="Please,Do NOT leave blank form.";
+	header("Location:home.php");
+}
