@@ -1,15 +1,16 @@
-		<?php 
-		$db= new PDO("mysql:host=localhost;dbname=test",'root',''); 
-		if (isset($_GET["sil"])) {
-			$v=$db->prepare("DELETE FROM `customers` WHERE `customers`.`id` = ?;" );
-			$v->execute(array($_GET["sil"]));
-	    						}
-		?>
+<?php 
+include 'baglantı.php';
+if (isset($_GET["sil"])) 
+	{
+	$v=$db->prepare("DELETE FROM `customers` WHERE `customers`.`id` = ?;" );
+	$v->execute(array($_GET["sil"]));
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>step2-1</title>
+	<title>index</title>
 <style>
 		#res{
 		margin-top: -9px;
@@ -98,7 +99,6 @@
 					<table class="table">
 					  <thead class="thead-dark">
 					    <tr>
-					      <th scope="col">#</th>
 					      <th scope="col">Ad</th>
 					      <th scope="col">Soyad</th>
 					      <th scope="col">Cep No</th>
@@ -107,14 +107,13 @@
 					      <th scope="col"></th>
 					  </thead>
 					  <tbody>
-						  	<?php 
-							
+					<?php 
 						$veri = $db->prepare("select * from customers  ");
 						$veri ->execute([]);
-						while ($islem=$veri->fetch(PDO::FETCH_ASSOC)) {
-								?>
+						while ($islem=$veri->fetch(PDO::FETCH_ASSOC)) 
+						{
+					?>
 							<tr>
-						      <th scope="row"><?php echo $islem["id"] ?></th>
 						      <td><?php echo $islem["ad"]; ?></td>
 						      <td><?php echo $islem["soyad"]; ?></td>
 						      <td><?php echo $islem["cep"]; ?></td>
@@ -125,8 +124,9 @@
 						      <a href="guncelle.php?id=<?php echo $islem['id'] ?>">Guncelle</a>									
 						      </td>
 						    </tr>
-						    <?php 									}
-							?>
+					<?php 									
+						}
+					?>
 					  </tbody>
 					</table>
 				</div>	
@@ -140,6 +140,5 @@
     <a href="https://mdbootstrap.com/bootstrap-tutorial/"> MDBootstrap.com</a>
   </div>
 </footer>
-	
 </body>
 </html>
