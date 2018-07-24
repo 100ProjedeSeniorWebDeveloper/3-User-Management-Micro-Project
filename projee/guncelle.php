@@ -1,9 +1,9 @@
-<?php $db= new PDO("mysql:host=localhost;dbname=test",'root',''); ?>
+<?php include 'baglantı.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>step2</title>
+	<title>guncelle</title>
 <style>
 
 		#res{
@@ -98,18 +98,34 @@
 							<input id="arama" type="text" name="not1">
 							<div><input type="submit" name="ekle" value="ekle"></div>
 							<?php 
-								$id1=$_GET['id']; 
-								if(isset($id1)&& isset($_POST['ad1']) && isset($_POST['soyad1'])&& isset($_POST['cep1'])&& isset($_POST['mail1'])&& isset($_POST['not1']))
-								{	
-								$ad= $_POST["ad1"];
-								$soyad = $_POST["soyad1"];
-								$cep =$_POST["cep1"];
-								$mail =$_POST["mail1"];
-								$not=$_POST["not1"];	
-						$v=$db->prepare("UPDATE `customers` SET `ad` = ?,`soyad` = ?, `cep` = ?, `mail` = ?, `not` = ? WHERE `customers`.`id` =$id1;" );
-						$v->execute([$ad,$soyad,$cep,$mail,$not]);
-	    						}
-							 ?>
+							if($_GET['id']=="")
+								{
+									header("location:inde.php");
+								} 
+							else
+								{
+								 $id1=$_GET['id'];
+							     if(isset($id1)&& isset($_POST['ad1']) && isset($_POST['soyad1'])
+							     && isset($_POST['cep1'])&& isset($_POST['mail1'])&& isset($_POST['not1']))
+								   	{	
+										$ad= $_POST["ad1"];
+										$soyad = $_POST["soyad1"];
+										$cep =$_POST["cep1"];
+										$mail =$_POST["mail1"];
+										$not=$_POST["not1"];
+										if ($ad=="" or $soyad=="" or $cep=="" or $mail=="" or $not=="" )
+											{
+												echo "lütfen bos birakmayiniz";
+											}
+											else
+												{
+													$v=$db->prepare("UPDATE `customers` SET `ad` = ?,`soyad` = ?, `cep` = ?, `mail` = 
+													?, `not` = ? WHERE `customers`.`id` =?;" );
+													$v->execute([$ad,$soyad,$cep,$mail,$not,$id1]);
+												}	
+	    							}	
+								}
+							?>
 							</form>
 						</div>
 				</div>
