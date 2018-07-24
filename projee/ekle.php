@@ -1,9 +1,9 @@
-<?php $db= new PDO("mysql:host=localhost;dbname=test",'root',''); ?>
+<?php include 'baglantı.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>step2</title>
+	<title>ekle</title>
 <style>
 
 		#res{
@@ -75,8 +75,8 @@
 	    			</div>
 				    <div id="bar" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  					
 				      	<ul class="nav navbar-nav navbar-right">
-				       		<li> <a id="icon" href="https://localhost/proje/inde.php#">Listele</a></li>
-				         	<li> <a id="icon" href="#">Ekle</a></li>
+				       		<li> <a id="icon" href="https://localhost/proje/inde.php">Listele</a></li>
+				         	<li> <a id="icon" href="https://localhost/proje/ekle.php">Ekle</a></li>
 				      	</ul>
 				    </div>
 			<div class="row">
@@ -97,19 +97,26 @@
 							<input id="arama" type="text" name="mail_f">
 							<input id="arama" type="text" name="not_f">
 							<div><input type="submit" name="ekle" value="ekle"></div>
-							<?php 
-						if(isset($_POST['ad_f']) && isset($_POST['soyad_f'])&& isset($_POST['cep_f'])&& isset($_POST['mail_f'])&& isset($_POST['not_f'])) {
+						<?php 
+							if(isset($_POST['ad_f']) && isset($_POST['soyad_f'])&& isset($_POST['cep_f'])&& isset($_POST['mail_f'])&& isset($_POST['not_f'])) 
+								{
 								$ad= $_POST["ad_f"];
 								$soyad = $_POST["soyad_f"];
 								$cep =$_POST["cep_f"];
 								$mail =$_POST["mail_f"];
 								$not=$_POST["not_f"];
-								$db= new PDO("mysql:host=localhost;dbname=test",'root','');
-								$sql= $db->prepare ("INSERT INTO `customers` (`id`, `ad`, `soyad`, `cep`, `mail`, `not`) VALUES (NULL,?,?,?,?,?)");
+								if ($ad=="" or $soyad=="" or $cep=="" or $mail=="" or $not=="" )
+									{
+									echo "lütfen bos birakmayiniz";
+									}
+								else{
+								$sql= $db->prepare ("INSERT INTO `customers` (`id`, `ad`, `soyad`, `cep`, `mail`, `not`) VALUES (
+								NULL,?,?,?,?,?)");
 								$insert = $sql->execute([$ad,$soyad,$cep,$mail,$not]);
-								//$db->execute($sql,[$ad,$soyad,$cep,$mail,$not]);
-							}
-							 ?>
+								header("location:inde.php");
+									}
+								}
+						?>
 							</form>
 						</div>
 				</div>
