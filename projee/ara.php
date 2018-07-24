@@ -1,16 +1,16 @@
-		<?php 
-			$db= new PDO("mysql:host=localhost;dbname=test",'root',''); 
-			if (isset($_GET["sil"]))
-			 {
-				$v=$db->prepare("DELETE FROM `customers` WHERE `customers`.`id` = ?;" );
-				$v->execute(array($_GET["sil"]));
-		     }
-		?>
+<?php 
+	include 'baglantı.php';
+	if (isset($_GET["sil"]))
+		{
+			$v=$db->prepare("DELETE FROM `customers` WHERE `customers`.`id` = ?;" );
+			$v->execute(array($_GET["sil"]));
+		}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>step2-1</title>
+	<title>ara</title>
 <style>
 		#res{
 		margin-top: -9px;
@@ -98,7 +98,6 @@
 					<table class="table">
 					  <thead class="thead-dark">
 					    <tr>
-					      <th scope="col">#</th>
 					      <th scope="col">Ad</th>
 					      <th scope="col">Soyad</th>
 					      <th scope="col">Cep No</th>
@@ -108,34 +107,35 @@
 					    </tr>
 					  </thead>
 					  <tbody>
-						  <?php 
-							$db= new PDO("mysql:host=localhost;dbname=test",'root','');
+						<?php 
+							include 'baglantı.php';
 							$ara=$_POST["ara"];
 							if (!$ara) 
-							{    
-								header("location:inde.php");
-							}
-								$listele=$db->prepare("select * from customers where ad LIKE :ara ");
+								{    
+									header("location:inde.php");
+								}
+								$listele=$db->prepare( "SELECT * from customers where 
+									ad LIKE :ara OR 
+									soyad LIKE :ara");
 								$listele->bindValue("ara","%$ara%",PDO::PARAM_STR);
 								$listele->execute();
 								$dizi=$listele->fetchAll(PDO::FETCH_ASSOC);
 							foreach ($dizi as $row)
-							 {
-						  ?>	
-							<tr>
-							 <th scope="row"><?php echo $row["id"] ?></th>
-						      <td><?php echo $row["ad"]; ?></td>
-						      <td><?php echo $row["soyad"]; ?></td>
-						      <td><?php echo $row["cep"]; ?></td>
-						      <td><?php echo $row["mail"]; ?></td>
-						      <td><?php echo $row["not"]; ?></td>
-						      <td> 		    	 
-						      <a href="?sil=<?php echo $row["id"] ?>">Sil</a>
-						      <a href="guncelle.php?id=<?php echo $row['id'] ?>">Guncelle</a>										
-						      </td>
-						    </tr>
+								{
+						?>	
+								<tr>
+							      <td><?php echo $row["ad"]; ?></td>
+							      <td><?php echo $row["soyad"]; ?></td>
+							      <td><?php echo $row["cep"]; ?></td>
+							      <td><?php echo $row["mail"]; ?></td>
+							      <td><?php echo $row["not"]; ?></td>
+							      <td> 		    	 
+							      <a href="?sil=<?php echo $row["id"] ?>">Sil</a>
+							      <a href="guncelle.php?id=<?php echo $row['id'] ?>">Guncelle</a>										
+							      </td>
+							    </tr>
 						  <?php  
-							}
+								}
 						  ?>
 					  </tbody>
 					</table>
